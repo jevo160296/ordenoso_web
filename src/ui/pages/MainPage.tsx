@@ -1,5 +1,5 @@
 import { BottomNavigation, BottomNavigationAction, Stack } from "@mui/material";
-import { usePersons, useRestaurants } from "../../data/DataModel";
+import { usePersons, useRestaurants } from "../../data/DummyDataModel";
 import { Person, PersonList } from "../person";
 import { Restaurant, RestaurantList } from "../restaurant";
 import { useState } from "react";

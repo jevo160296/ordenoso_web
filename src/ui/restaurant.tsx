@@ -2,7 +2,10 @@ import { Box } from "@mui/material"
 import ListView from "./layouts/ListView"
 
 
-export type Restaurant = { name: string }
+export type Restaurant = { 
+    restaurantId: number,
+    name: string 
+}
 
 export function RestaurantViewHolder(props: {restaurant: Restaurant}){
     const restaurant = props.restaurant

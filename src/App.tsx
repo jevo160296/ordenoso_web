@@ -7,9 +7,7 @@ import MainAppBar from './ui/widgets/MainAppBar';
 function App() {
   return (
     <div className="App">
-      <Stack
-        alignItems="stretch"
-      >
+      <Stack>
         <MainAppBar/>
         <MainPage/>
       </Stack>

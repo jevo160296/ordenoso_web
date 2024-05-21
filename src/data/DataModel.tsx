@@ -6,8 +6,8 @@ import { Restaurant } from "../ui/restaurant";
 const url = "https://us-central1-helloktor-422701.cloudfunctions.net"
 
 export function usePersons(): Array<Person>{
-    const {data} = useAxios(`${url}/get_persons?cant=10`)
-    return data
+  const {data} = useAxios(`${url}/get_persons?cant=10`)
+  return data
 }
 
 export function useRestaurants(): Array<Restaurant>{
@@ -15,7 +15,7 @@ export function useRestaurants(): Array<Restaurant>{
   return data
 }
 
-export function useAxios(url:string): {data: any, loading:any, error:any}{
+function useAxios(url:string): {data: any, loading:any, error:any}{
     const [data, setData] = useState();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);

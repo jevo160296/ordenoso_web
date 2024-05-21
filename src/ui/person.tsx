@@ -4,6 +4,7 @@ import ListView from "./layouts/ListView";
 
 
 export type Person = {
+    personId: number,
     name: string
 }
 
