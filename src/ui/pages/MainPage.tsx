@@ -1,4 +1,4 @@
-import { BottomNavigation, BottomNavigationAction } from "@mui/material";
+import { BottomNavigation, BottomNavigationAction, Stack } from "@mui/material";
 import { usePersons, useRestaurants } from "../../data/DataModel";
 import { Person, PersonList } from "../person";
 import { Restaurant, RestaurantList } from "../restaurant";
@@ -10,12 +10,10 @@ export default function MainPage(){
     const [selectedPage, setSelectedPage] = useState(0);
     if(!persons || !restaurants) return <p>Loading...</p>
     return (
-        <div>
-            <Pager 
-                selectedPage={selectedPage} 
-                persons={persons} 
-                restaurants={restaurants}
-            />
+        <Stack
+            alignItems="stretch"
+            justifyContent="space-between"
+        >
             <BottomNavigation
                 showLabels
                 value={selectedPage}
@@ -24,7 +22,12 @@ export default function MainPage(){
                 <BottomNavigationAction label="Persons"/>
                 <BottomNavigationAction label="Restaurants"/>
             </BottomNavigation>
-        </div>
+            <Pager 
+                selectedPage={selectedPage} 
+                persons={persons} 
+                restaurants={restaurants}
+            />
+        </Stack>
     )
 }
 
