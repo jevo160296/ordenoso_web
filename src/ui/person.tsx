@@ -1,12 +1,25 @@
 import React from "react";
+import Box from '@mui/material/Box';
 
-function Person(data: {title: string, body: string}){
+
+export type Person = {
+    name: string
+}
+
+export function PersonViewHolder(props: {person: Person}){
+    const person = props.person
     return (
-        <div>
-            <h1>{data.title}</h1>
-            <p>{data.body}</p>
-        </div>
+        <Box>
+            Person: {person.name}
+        </Box>
     )
 }
 
-export default Person;
+export function PersonList(props: {persons: Array<Person>}){
+    const persons = props.persons
+    return (
+        <div>
+            {persons.map((person) => <PersonViewHolder person={person}/>)}
+        </div>
+    )
+}
