@@ -1,5 +1,6 @@
 import React from "react";
 import Box from '@mui/material/Box';
+import ListView from "./layouts/ListView";
 
 
 export type Person = {
@@ -18,8 +19,6 @@ export function PersonViewHolder(props: {person: Person}){
 export function PersonList(props: {persons: Array<Person>}){
     const persons = props.persons
     return (
-        <div>
-            {persons.map((person) => <PersonViewHolder person={person}/>)}
-        </div>
+        <ListView items={persons} itemViewHolder={(person) => <PersonViewHolder person={person}/>}/>
     )
 }
