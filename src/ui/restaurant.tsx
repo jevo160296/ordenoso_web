@@ -1,11 +1,21 @@
+import { Box } from "@mui/material"
+import ListView from "./layouts/ListView"
 
 
 export type Restaurant = { name: string }
 
 export function RestaurantViewHolder(props: {restaurant: Restaurant}){
-    return <p>Restarant view holder not implemented</p>
+    const restaurant = props.restaurant
+    return (
+        <Box>
+            Restaurant: {restaurant.name}
+        </Box>
+    )
 }
 
 export function RestaurantList(props: {restaurants: Array<Restaurant>}){
-    return <p>Restaurant list not implemented</p>
+    return <ListView 
+        items={props.restaurants} 
+        itemViewHolder={(restaurant) => <RestaurantViewHolder restaurant={restaurant}/>}
+        />
 }
