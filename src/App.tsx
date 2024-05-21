@@ -1,26 +1,43 @@
-import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axios from "axios";
+import React, { useState } from "react";
+import Person from './ui/person';
+
+const baseURL = "https://jsonplaceholder.typicode.com/posts";
 
 function App() {
+  const {data, loading, error} = useAxios(`${baseURL}/1`);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Data</h1>
+      <p>{`Loading: ${loading}`}</p>
+      <p>{`Error: ${error}`}</p>
+      <Person {...data}/>
     </div>
   );
+}
+
+function useAxios(url:string): {data: {title: string, body: string}, loading:any, error:any}{
+  const [data, setData] = useState({
+    title: "",
+    body: ""
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  axios
+      .get(url)
+      .then((response) => {
+        setData(response.data)
+        setLoading(false);
+      })
+      .catch((reason) => setError(reason));
+  return {
+    data: data,
+    loading: loading,
+    error: error
+  }
 }
 
 export default App;
