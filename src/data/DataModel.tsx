@@ -25,7 +25,7 @@ export function useRestaurants(url: string): {
   loading: any,
   error: any
 } {
-  const { data, loading, error } = useAxiosRepeater(`${url}/get_restaurants?cant=10`, 1000)
+  const { data, loading, error } = useAxiosRepeater(`${url}/restaurant`, 1000)
   return {
     restaurants: data,
     loading: loading,
@@ -56,7 +56,7 @@ export function createRestaurant(
 ){
   axios
     .post(
-      `${url}/create_restaurant`,
+      `${url}/restaurant`,
       restaurant
     )
     .then((value) => onSuccess())

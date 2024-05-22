@@ -1,4 +1,4 @@
-import { BottomNavigation, BottomNavigationAction, Button, Stack } from "@mui/material";
+import { BottomNavigation, BottomNavigationAction, Button, Stack, TextField } from "@mui/material";
 import { createPerson, createRestaurant, mockUrl, url, usePersons, useRestaurants } from "../../data/DataModel";
 import { Person, PersonList } from "../person";
 import { Restaurant, RestaurantList } from "../restaurant";
@@ -16,10 +16,10 @@ export default function MainPage(){
     const {persons, error:errorPersons} = usePersons(url);
     const {restaurants, error:errorRestaurants} = useRestaurants(url);
     const [selectedPage, setSelectedPage] = useState(0);
+    const [name, setName] = useState<string|null>(null);
     let navigate = useNavigate();
     return (
         <Stack
-            alignItems="stretch"
             justifyContent="space-between"
         >
             <MainAppBar onLogout={() => {navigateToLoginPage(navigate)}}/>
@@ -31,26 +31,29 @@ export default function MainPage(){
                 <BottomNavigationAction label="Persons"/>
                 <BottomNavigationAction label="Restaurants"/>
             </BottomNavigation>
-            <Button onClick={() => {
-                if(selectedPage === 0){
-                    createPerson(url,{
-                        name: "PersonName",
-                        id: undefined
-                    },
+            <Stack direction="row" spacing="8px" sx={{paddingLeft:"8px", paddingRight:"8px"}}>
+                <TextField sx={{flex:1}} label="Name" variant="outlined" value={name} onChange={(event) => {setName(event.target.value)}}/>
+                <Button onClick={() => {
+                    if(selectedPage === 0){
+                        createPerson(url,{
+                            name: name ?? "Empty",
+                            id: undefined
+                        },
+                            () => {},
+                            (reason: any) => {alert(`Error creating person: ${reason}`)}
+                    )
+                    }
+                    else{
+                        createRestaurant(url,{
+                            name: name ?? "Empty",
+                            id: undefined
+                        },
                         () => {},
-                        (reason: any) => {alert(`Error creating person: ${reason}`)}
-                )
-                }
-                else{
-                    createRestaurant(url,{
-                        name: "RestaurantName",
-                        id: undefined
-                    },
-                    () => {},
-                    (reason: any) => {alert(`Error creating restaurant: ${reason}`)}
-                )
-                }
-            }}>Click me</Button>
+                        (reason: any) => {alert(`Error creating restaurant: ${reason}`)}
+                    )
+                    }
+                }}>Click me</Button>
+            </Stack>
             <Pager 
                 selectedPage={selectedPage} 
                 persons={persons} 
