@@ -4,18 +4,25 @@ import { Person, PersonList } from "../person";
 import { Restaurant, RestaurantList } from "../restaurant";
 import { useState } from "react";
 import MainAppBar from "../widgets/MainAppBar";
+import { NavigateFunction, useNavigate } from "react-router-dom";
+import { navigateToLoginPage } from "./LoginPage";
+
+export const MAINROUTE = "/dashboard"
+
+export function navigateToMainPage(navigate: NavigateFunction){navigate(MAINROUTE)}
 
 export default function MainPage(){
     const url = mockUrl;
     const persons = usePersons(url);
     const restaurants = useRestaurants(url);
     const [selectedPage, setSelectedPage] = useState(0);
+    let navigate = useNavigate();
     return (
         <Stack
             alignItems="stretch"
             justifyContent="space-between"
         >
-            <MainAppBar/>
+            <MainAppBar onLogout={() => {navigateToLoginPage(navigate)}}/>
             <BottomNavigation
                 showLabels
                 value={selectedPage}
