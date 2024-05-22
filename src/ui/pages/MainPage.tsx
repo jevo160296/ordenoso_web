@@ -1,12 +1,13 @@
-import { BottomNavigation, BottomNavigationAction, Stack } from "@mui/material";
-import { usePersons, useRestaurants } from "../../data/DummyDataModel";
+import { BottomNavigation, BottomNavigationAction, Button, Stack } from "@mui/material";
+import { createPerson, mockUrl, usePersons, useRestaurants } from "../../data/DataModel";
 import { Person, PersonList } from "../person";
 import { Restaurant, RestaurantList } from "../restaurant";
 import { useState } from "react";
 
 export default function MainPage(){
-    const persons = usePersons();
-    const restaurants = useRestaurants();
+    const url = mockUrl;
+    const persons = usePersons(url);
+    const restaurants = useRestaurants(url);
     const [selectedPage, setSelectedPage] = useState(0);
     if(!persons || !restaurants) return <p>Loading...</p>
     return (
@@ -22,6 +23,12 @@ export default function MainPage(){
                 <BottomNavigationAction label="Persons"/>
                 <BottomNavigationAction label="Restaurants"/>
             </BottomNavigation>
+            <Button onClick={() => {
+                createPerson(url,{
+                    name: "PersonName",
+                    id: undefined
+                })
+            }}>Click me</Button>
             <Pager 
                 selectedPage={selectedPage} 
                 persons={persons} 
