@@ -1,5 +1,5 @@
 import { BottomNavigation, BottomNavigationAction, Button, Stack } from "@mui/material";
-import { createPerson, mockUrl, usePersons, useRestaurants } from "../../data/DataModel";
+import { createPerson, createRestaurant, mockUrl, url, usePersons, useRestaurants } from "../../data/DataModel";
 import { Person, PersonList } from "../person";
 import { Restaurant, RestaurantList } from "../restaurant";
 import { useState } from "react";
@@ -13,8 +13,8 @@ export function navigateToMainPage(navigate: NavigateFunction){navigate(MAINROUT
 
 export default function MainPage(){
     const url = mockUrl;
-    const persons = usePersons(url);
-    const restaurants = useRestaurants(url);
+    const {persons, error:errorPersons} = usePersons(url);
+    const {restaurants, error:errorRestaurants} = useRestaurants(url);
     const [selectedPage, setSelectedPage] = useState(0);
     let navigate = useNavigate();
     return (
@@ -32,15 +32,25 @@ export default function MainPage(){
                 <BottomNavigationAction label="Restaurants"/>
             </BottomNavigation>
             <Button onClick={() => {
-                createPerson(url,{
-                    name: "PersonName",
-                    id: undefined
-                })
+                if(selectedPage === 0){
+                    createPerson(url,{
+                        name: "PersonName",
+                        id: undefined
+                    })
+                }
+                else{
+                    createRestaurant(url,{
+                        name: "RestaurantName",
+                        id: undefined
+                    })
+                }
             }}>Click me</Button>
             <Pager 
                 selectedPage={selectedPage} 
                 persons={persons} 
                 restaurants={restaurants}
+                personsError={errorPersons}
+                restaurantsError={errorRestaurants}
             />
         </Stack>
     )
@@ -49,16 +59,22 @@ export default function MainPage(){
 function Pager(props: {
     selectedPage: number,
     persons: Array<Person>|null,
-    restaurants: Array<Restaurant>|null
+    personsError: any,
+    restaurants: Array<Restaurant>|null,
+    restaurantsError: any
 }){
-    const selectedPage = props.selectedPage
-    const persons = props.persons
-    const restaurants = props.restaurants
+    const {
+        selectedPage,
+        persons,
+        restaurants,
+        personsError
+    } = props
+    const restaurantError = props.restaurantsError
     if(selectedPage === 0){
         return (
             <div>
                 <h1>Person List</h1>
-                <PersonList persons={persons}/>
+                <PersonList persons={persons} personsError={personsError}/>
             </div>
         )
     }
@@ -66,7 +82,7 @@ function Pager(props: {
         return (
             <div>
                 <h1>Restaurant List</h1>
-                <RestaurantList restaurants={restaurants}/>
+                <RestaurantList restaurants={restaurants} restaurantsError={restaurantError}/>
             </div>
         )
     }

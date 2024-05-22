@@ -18,18 +18,19 @@ export function PersonViewHolder(props: {person: Person}){
     )
 }
 
-export function PersonList(props: {persons: Array<Person>|null}){
-    const persons = props.persons
-    if(!persons) return (
-        <Box sx={{
-            display: "flex",
-            width: "100%",
-            justifyContent: "center"
-        }}>
-            <Skeleton variant="rounded" width={"90%"} height={100}/>
-        </Box>
-    )
-    return (
-        <ListView items={persons} itemViewHolder={(person) => <PersonViewHolder person={person}/>}/>
-    )
+export function PersonList(props: {persons: Array<Person>|null, personsError:any}){
+    const {persons,personsError} = props
+    if(personsError) return (<p>Error!: {JSON.stringify(personsError)}</p>)
+        if(!persons) return (
+            <Box sx={{
+                display: "flex",
+                width: "100%",
+                justifyContent: "center"
+            }}>
+                <Skeleton variant="rounded" width={"90%"} height={100}/>
+            </Box>
+        )
+        return (
+            <ListView items={persons} itemViewHolder={(person) => <PersonViewHolder person={person}/>}/>
+        )
 }

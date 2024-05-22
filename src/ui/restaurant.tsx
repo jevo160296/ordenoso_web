@@ -3,7 +3,7 @@ import ListView from "./layouts/ListView"
 
 
 export type Restaurant = { 
-    restaurantId: number,
+    id: number|undefined,
     name: string 
 }
 
@@ -16,8 +16,10 @@ export function RestaurantViewHolder(props: {restaurant: Restaurant}){
     )
 }
 
-export function RestaurantList(props: {restaurants: Array<Restaurant>|null}){
+export function RestaurantList(props: {restaurants: Array<Restaurant>|null, restaurantsError:any}){
     const restaurants = props.restaurants;
+    const restaurantsError = props.restaurantsError;
+    if(restaurantsError) return (<p>Error!: {JSON.stringify(restaurantsError)}</p>)
     if(!restaurants) return (
         <Box sx={{
             display: "flex",

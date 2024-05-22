@@ -7,14 +7,30 @@ export const url = "https://us-central1-helloktor-422701.cloudfunctions.net"
 //The next url is used with json server instance.
 export const mockUrl = "http://192.168.1.5:3030"
 
-export function usePersons(url: string): Array<Person>|null{
-  const {data} = useAxiosRepeater(`${url}/get_persons?cant=10`, 1000)
-  return data
+export function usePersons(url: string): {
+  persons: Array<Person>|null,
+  loading: any,
+  error: any
+}{
+  const {data, loading, error} = useAxiosRepeater(`${url}/get_persons?cant=10`, 1000)
+  return {
+    persons: data,
+    loading: loading,
+    error: error
+  }
 }
 
-export function useRestaurants(url: string): Array<Restaurant>|null{
-  const {data} = useAxiosRepeater(`${url}/get_restaurants?cant=10`, 1000)
-  return data
+export function useRestaurants(url: string): {
+  restaurants: Array<Restaurant>|null,
+  loading: any,
+  error: any
+}{
+  const {data, loading, error} = useAxiosRepeater(`${url}/get_restaurants?cant=10`, 1000)
+  return {
+    restaurants: data,
+    loading: loading,
+    error: error
+  }
 }
 
 export function createPerson(url: string, person: Person){
@@ -25,7 +41,13 @@ export function createPerson(url: string, person: Person){
     )
 }
 
-export function createRestaurant(restaurant: Restaurant){}
+export function createRestaurant(url: string, restaurant: Restaurant){
+  axios
+  .post(
+    `${url}/get_restaurants`,
+    restaurant
+  )
+}
 
 function useAxiosRepeater(url: string, time: number): {data: any|null, loading: any,error:any}{
   const [data, setData] = useState<any|null>(null);
