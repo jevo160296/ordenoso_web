@@ -1,63 +1,7 @@
 {
   "get_persons": [
     {
-      "id": "5a04",
-      "name": "PersonName"
-    },
-    {
-      "id": "a122",
-      "name": "PersonName"
-    },
-    {
-      "id": "345a",
-      "name": "PersonName"
-    },
-    {
-      "id": "54a5",
-      "name": "PersonName"
-    },
-    {
-      "id": "1dc9",
-      "name": "PersonName"
-    },
-    {
-      "id": "abd3",
-      "name": "PersonName"
-    },
-    {
-      "id": "79bd",
-      "name": "PersonName"
-    },
-    {
-      "id": "6e94",
-      "name": "PersonName"
-    },
-    {
-      "id": "9af6",
-      "name": "PersonName"
-    },
-    {
-      "id": "74be",
-      "name": "PersonName"
-    },
-    {
-      "id": "52cc",
-      "name": "PersonName"
-    },
-    {
-      "id": "5753",
-      "name": "PersonName"
-    },
-    {
-      "id": "0e12",
-      "name": "PersonName"
-    },
-    {
-      "id": "a624",
-      "name": "PersonName"
-    },
-    {
-      "id": "79f6",
+      "id": "3afb",
       "name": "PersonName"
     }
   ],

@@ -3,6 +3,7 @@ import { createPerson, mockUrl, usePersons, useRestaurants } from "../../data/Da
 import { Person, PersonList } from "../person";
 import { Restaurant, RestaurantList } from "../restaurant";
 import { useState } from "react";
+import MainAppBar from "../widgets/MainAppBar";
 
 export default function MainPage(){
     const url = mockUrl;
@@ -15,6 +16,7 @@ export default function MainPage(){
             alignItems="stretch"
             justifyContent="space-between"
         >
+            <MainAppBar/>
             <BottomNavigation
                 showLabels
                 value={selectedPage}
