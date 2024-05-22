@@ -5,7 +5,7 @@ import { Restaurant } from "../ui/restaurant";
 
 export const url = "https://us-central1-helloktor-422701.cloudfunctions.net"
 //The next url is used with json server instance.
-export const mockUrl = "http://localhost:3030"
+export const mockUrl = "http://192.168.1.5:3030"
 
 export function usePersons(url: string): Array<Person>{
   const {data} = useAxiosRepeater(`${url}/get_persons?cant=10`, 1000)
