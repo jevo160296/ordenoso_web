@@ -1,6 +1,7 @@
 import React from "react";
 import Box from '@mui/material/Box';
 import ListView from "./layouts/ListView";
+import { Skeleton } from "@mui/material";
 
 
 export type Person = {
@@ -17,8 +18,17 @@ export function PersonViewHolder(props: {person: Person}){
     )
 }
 
-export function PersonList(props: {persons: Array<Person>}){
+export function PersonList(props: {persons: Array<Person>|null}){
     const persons = props.persons
+    if(!persons) return (
+        <Box sx={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "center"
+        }}>
+            <Skeleton variant="rounded" width={"90%"} height={100}/>
+        </Box>
+    )
     return (
         <ListView items={persons} itemViewHolder={(person) => <PersonViewHolder person={person}/>}/>
     )

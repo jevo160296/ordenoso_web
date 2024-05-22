@@ -10,7 +10,6 @@ export default function MainPage(){
     const persons = usePersons(url);
     const restaurants = useRestaurants(url);
     const [selectedPage, setSelectedPage] = useState(0);
-    if(!persons || !restaurants) return <p>Loading...</p>
     return (
         <Stack
             alignItems="stretch"
@@ -42,13 +41,13 @@ export default function MainPage(){
 
 function Pager(props: {
     selectedPage: number,
-    persons: Array<Person>,
-    restaurants: Array<Restaurant>
+    persons: Array<Person>|null,
+    restaurants: Array<Restaurant>|null
 }){
     const selectedPage = props.selectedPage
     const persons = props.persons
     const restaurants = props.restaurants
-    if(selectedPage == 0){
+    if(selectedPage === 0){
         return (
             <div>
                 <h1>Person List</h1>
