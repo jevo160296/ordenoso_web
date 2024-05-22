@@ -36,13 +36,19 @@ export default function MainPage(){
                     createPerson(url,{
                         name: "PersonName",
                         id: undefined
-                    })
+                    },
+                        () => {},
+                        (reason: any) => {alert(`Error creating person: ${reason}`)}
+                )
                 }
                 else{
                     createRestaurant(url,{
                         name: "RestaurantName",
                         id: undefined
-                    })
+                    },
+                    () => {},
+                    (reason: any) => {alert(`Error creating restaurant: ${reason}`)}
+                )
                 }
             }}>Click me</Button>
             <Pager 

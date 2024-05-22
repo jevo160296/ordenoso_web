@@ -8,11 +8,11 @@ export const url = "https://us-central1-helloktor-422701.cloudfunctions.net"
 export const mockUrl = "http://192.168.1.5:3030"
 
 export function usePersons(url: string): {
-  persons: Array<Person>|null,
+  persons: Array<Person> | null,
   loading: any,
   error: any
-}{
-  const {data, loading, error} = useAxiosRepeater(`${url}/get_persons?cant=10`, 1000)
+} {
+  const { data, loading, error } = useAxiosRepeater(`${url}/person`, 1000)
   return {
     persons: data,
     loading: loading,
@@ -21,11 +21,11 @@ export function usePersons(url: string): {
 }
 
 export function useRestaurants(url: string): {
-  restaurants: Array<Restaurant>|null,
+  restaurants: Array<Restaurant> | null,
   loading: any,
   error: any
-}{
-  const {data, loading, error} = useAxiosRepeater(`${url}/get_restaurants?cant=10`, 1000)
+} {
+  const { data, loading, error } = useAxiosRepeater(`${url}/get_restaurants?cant=10`, 1000)
   return {
     restaurants: data,
     loading: loading,
@@ -33,24 +33,38 @@ export function useRestaurants(url: string): {
   }
 }
 
-export function createPerson(url: string, person: Person){
+export function createPerson(
+  url: string,
+  person: Person,
+  onSuccess: () => void,
+  onError: (reason: any) => void
+) {
   axios
     .post(
-      `${url}/get_persons`,
+      `${url}/person`,
       person
     )
+    .then((value) => onSuccess())
+    .catch((reason) => onError(reason))
 }
 
-export function createRestaurant(url: string, restaurant: Restaurant){
+export function createRestaurant(
+  url: string, 
+  restaurant: Restaurant,
+  onSuccess: () => void,
+  onError: (reason: any) => void
+){
   axios
-  .post(
-    `${url}/get_restaurants`,
-    restaurant
-  )
+    .post(
+      `${url}/create_restaurant`,
+      restaurant
+    )
+    .then((value) => onSuccess())
+    .catch((reason) => onError(reason))
 }
 
-function useAxiosRepeater(url: string, time: number): {data: any|null, loading: any,error:any}{
-  const [data, setData] = useState<any|null>(null);
+function useAxiosRepeater(url: string, time: number): { data: any | null, loading: any, error: any } {
+  const [data, setData] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   useEffect(() => {
@@ -72,23 +86,23 @@ function useAxiosRepeater(url: string, time: number): {data: any|null, loading: 
   }
 }
 
-function useAxios(url:string): {data: any, loading:any, error:any}{
-    const [data, setData] = useState();
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    useEffect(() =>{
-      axios
-        .get(url)
-        .then((response) => {
-          setData(response.data)
-          setLoading(false);
-        })
-        .catch((reason) => setError(reason))
-    }, [url]
-    );
-    return {
-      data: data,
-      loading: loading,
-      error: error
-    }
+function useAxios(url: string): { data: any, loading: any, error: any } {
+  const [data, setData] = useState();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    axios
+      .get(url)
+      .then((response) => {
+        setData(response.data)
+        setLoading(false);
+      })
+      .catch((reason) => setError(reason))
+  }, [url]
+  );
+  return {
+    data: data,
+    loading: loading,
+    error: error
   }
+}
