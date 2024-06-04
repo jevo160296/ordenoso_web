@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/ordenoso_web/static/css/main.f855e6bc.css",
+    "main.js": "/ordenoso_web/static/js/main.5dd0a2b3.js",
+    "static/js/453.93f6e3f0.chunk.js": "/ordenoso_web/static/js/453.93f6e3f0.chunk.js",
+    "index.html": "/ordenoso_web/index.html",
+    "main.f855e6bc.css.map": "/ordenoso_web/static/css/main.f855e6bc.css.map",
+    "main.5dd0a2b3.js.map": "/ordenoso_web/static/js/main.5dd0a2b3.js.map",
+    "453.93f6e3f0.chunk.js.map": "/ordenoso_web/static/js/453.93f6e3f0.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f855e6bc.css",
+    "static/js/main.5dd0a2b3.js"
+  ]
+}
